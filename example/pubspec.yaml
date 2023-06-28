@@ -1,0 +1,21 @@
+name: iglu_color_picker_flutter_example
+description: Highly customizable color picker for Flutter - Example
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.1 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  iglu_color_picker_flutter:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^5.0.0+1
+
+flutter:
+  uses-material-design: true
