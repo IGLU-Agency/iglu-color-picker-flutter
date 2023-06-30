@@ -18,7 +18,6 @@ class IGColorPicker extends StatefulWidget {
     this.paletteType = IGPaletteType.hsvWithHue,
     this.currentColor,
     this.onColorChanged,
-
     //HISTORY
     this.historyColorsBuilder,
     this.colorHistory,
@@ -95,7 +94,6 @@ class IGColorPicker extends StatefulWidget {
   final double? areaBorderWidth;
 
   //DECORATION COLOR PICKER INPUT BAR
-
   final bool showInputBar;
   final double? inputBarRadius;
   final Color? inputBarBorderColor;

@@ -17,12 +17,16 @@ class IGColorPickerHueRing extends StatelessWidget {
     super.key,
     this.displayThumbColor = true,
     this.strokeWidth = 5.0,
+    this.borderWidth,
+    this.borderColor,
   });
 
   final HSVColor hsvColor;
   final ValueChanged<HSVColor> onColorChanged;
   final bool displayThumbColor;
   final double strokeWidth;
+  final double? borderWidth;
+  final Color? borderColor;
 
   void _handleGesture(
     Offset position,
@@ -84,6 +88,8 @@ class IGColorPickerHueRing extends StatelessWidget {
               hsvColor,
               displayThumbColor: displayThumbColor,
               strokeWidth: strokeWidth,
+              borderColor: borderColor,
+              borderWidth: borderWidth,
             ),
           ),
         );

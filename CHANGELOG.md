@@ -1,3 +1,8 @@
-## Version 1.0.1 - 28/06/2023 - Luca Iaconelli ([IGLU](https://www.iglu.dev/en/))
+## Version 1.0.2 - 30/06/2023 
+
+- Added Hue Ring Picker
+- Added Slide Picker 
+
+## Version 1.0.1 - 28/06/2023
 
 - First Release

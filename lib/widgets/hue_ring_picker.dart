@@ -4,31 +4,79 @@
 // Copyright © 2020 - 2023 IGLU S.r.l.s.
 //
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iglu_color_picker_flutter/iglu_color_picker_flutter.dart';
 
 /// The Color Picker with HUE Ring & HSV model.
 class IGHueRingPicker extends StatefulWidget {
   const IGHueRingPicker({
-    required this.pickerColor,
-    required this.onColorChanged,
     super.key,
-    this.portraitOnly = false,
-    this.colorPickerHeight = 250.0,
-    this.hueRingStrokeWidth = 20.0,
-    this.enableAlpha = false,
+    //GENERAL
+    this.currentColor,
+    this.onColorChanged,
     this.displayThumbColor = true,
-    this.pickerAreaBorderRadius = BorderRadius.zero,
+    //DECORATION HUE RING
+    this.hueRingHeight = 250.0,
+    this.hueRingStrokeWidth = 20.0,
+    this.hueRingBorderColor,
+    this.hueRingBorderWidth,
+    //DECORATION COLOR PICKER AREA
+    this.areaRadius,
+    this.areaBorderColor,
+    this.areaBorderWidth,
+    //ALL VIEWS DECORATION
+    this.padding,
+    this.elementSpacing = 10,
+    //DECORATION COLOR PICKER ALPHA SLIDER
+    this.enableAlpha = true,
+    this.alphaSliderRadius,
+    this.alphaSliderBorderColor,
+    this.alphaSliderBorderWidth,
+    //DECORATION COLOR PICKER INPUT BAR
+    this.showInputBar = true,
+    this.inputBarBorderColor,
+    this.inputBarBorderWidth,
+    this.inputBarRadius,
+    this.inputBarPadding,
+    this.inputBarDisable,
+    this.customInputBar,
   });
 
-  final Color pickerColor;
-  final ValueChanged<Color> onColorChanged;
-  final bool portraitOnly;
-  final double colorPickerHeight;
-  final double hueRingStrokeWidth;
-  final bool enableAlpha;
+  //GENERAL
+  final Color? currentColor;
+  final ValueChanged<Color>? onColorChanged;
   final bool displayThumbColor;
-  final BorderRadius pickerAreaBorderRadius;
+
+  //DECORATION HUE RING
+  final double hueRingHeight;
+  final double hueRingStrokeWidth;
+  final Color? hueRingBorderColor;
+  final double? hueRingBorderWidth;
+
+  //DECORATION COLOR PICKER AREA
+  final double? areaRadius;
+  final Color? areaBorderColor;
+  final double? areaBorderWidth;
+
+  //ALL VIEWS DECORATION
+  final EdgeInsetsGeometry? padding;
+  final double elementSpacing;
+
+  //DECORATION COLOR PICKER ALPHA SLIDER
+  final bool enableAlpha;
+  final double? alphaSliderRadius;
+  final Color? alphaSliderBorderColor;
+  final double? alphaSliderBorderWidth;
+
+  //DECORATION COLOR PICKER INPUT BAR
+  final bool showInputBar;
+  final double? inputBarRadius;
+  final Color? inputBarBorderColor;
+  final double? inputBarBorderWidth;
+  final EdgeInsetsGeometry? inputBarPadding;
+  final bool? inputBarDisable;
+  final Widget Function(Color)? customInputBar;
 
   @override
   IGHueRingPickerState createState() => IGHueRingPickerState();
@@ -39,168 +87,115 @@ class IGHueRingPickerState extends State<IGHueRingPicker> {
 
   @override
   void initState() {
-    currentHsvColor = HSVColor.fromColor(widget.pickerColor);
+    currentHsvColor = HSVColor.fromColor(widget.currentColor ?? Colors.red);
     super.initState();
   }
 
   @override
   void didUpdateWidget(IGHueRingPicker oldWidget) {
     super.didUpdateWidget(oldWidget);
-    currentHsvColor = HSVColor.fromColor(widget.pickerColor);
+    currentHsvColor = HSVColor.fromColor(widget.currentColor ?? Colors.red);
   }
 
   void onColorChanging(HSVColor color) {
     setState(() => currentHsvColor = color);
-    widget.onColorChanged(currentHsvColor.toColor());
+    widget.onColorChanged?.call(currentHsvColor.toColor());
   }
 
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).orientation == Orientation.portrait ||
-        widget.portraitOnly) {
-      return Column(
+    return Padding(
+      padding: widget.padding ??
+          const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Column(
         children: <Widget>[
-          ClipRRect(
-            borderRadius: widget.pickerAreaBorderRadius,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Stack(
-                alignment: AlignmentDirectional.center,
-                children: <Widget>[
-                  SizedBox(
-                    width: widget.colorPickerHeight,
-                    height: widget.colorPickerHeight,
-                    child: IGColorPickerHueRing(
-                      currentHsvColor,
-                      onColorChanging,
-                      displayThumbColor: widget.displayThumbColor,
-                      strokeWidth: widget.hueRingStrokeWidth,
-                    ),
-                  ),
-                  SizedBox(
-                    width: widget.colorPickerHeight / 1.6,
-                    height: widget.colorPickerHeight / 1.6,
-                    child: IGColorPickerArea(
-                      hsvColor: currentHsvColor,
-                      onColorChanged: onColorChanging,
-                      paletteType: IGPaletteType.hsv,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          if (widget.enableAlpha)
-            SizedBox(
-              height: 40,
-              width: widget.colorPickerHeight,
-              child: IGColorPickerSlider(
-                trackType: IGTrackType.alpha,
-                hsvColor: currentHsvColor,
-                onColorChanged: onColorChanging,
-                displayThumbColor: widget.displayThumbColor,
-              ),
-            ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 5, 10, 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            padding: const EdgeInsets.all(15),
+            child: Stack(
+              alignment: AlignmentDirectional.center,
               children: <Widget>[
-                const SizedBox(width: 10),
-                IGColorIndicator(currentHsvColor),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
-                    child: IGColorPickerInput(
-                      color: currentHsvColor.toColor(),
-                      onColorChanged: (Color color) {
-                        setState(
-                          () => currentHsvColor = HSVColor.fromColor(color),
-                        );
-                        widget.onColorChanged(currentHsvColor.toColor());
-                      },
-                      enableAlpha: widget.enableAlpha,
-                    ),
+                SizedBox(
+                  width: widget.hueRingHeight,
+                  height: widget.hueRingHeight,
+                  child: IGColorPickerHueRing(
+                    currentHsvColor,
+                    onColorChanging,
+                    displayThumbColor: widget.displayThumbColor,
+                    strokeWidth: widget.hueRingStrokeWidth,
+                    borderColor: widget.hueRingBorderColor,
+                    borderWidth: widget.hueRingBorderWidth,
                   ),
                 ),
+                SizedBox(
+                  width: widget.hueRingHeight / 1.6,
+                  height: widget.hueRingHeight / 1.6,
+                  child: IGColorPickerArea(
+                    hsvColor: currentHsvColor,
+                    onColorChanged: onColorChanging,
+                    paletteType: IGPaletteType.hsv,
+                    borderColor: widget.areaBorderColor,
+                    borderWidth: widget.areaBorderWidth,
+                    radius: widget.areaRadius,
+                  ),
+                )
               ],
             ),
           ),
-        ],
-      );
-    } else {
-      return Row(
-        children: <Widget>[
-          Expanded(
-            child: SizedBox(
-              width: 300,
-              height: widget.colorPickerHeight,
-              child: ClipRRect(
-                borderRadius: widget.pickerAreaBorderRadius,
-                child: IGColorPickerArea(
-                  hsvColor: currentHsvColor,
-                  onColorChanged: onColorChanging,
-                  paletteType: IGPaletteType.hsv,
-                ),
-              ),
+
+          space,
+
+          if (widget.enableAlpha)
+            IGColorPickerSlider(
+              trackType: IGTrackType.alpha,
+              hsvColor: currentHsvColor,
+              onColorChanged: onColorChanging,
+              displayThumbColor: widget.displayThumbColor,
+              borderColor:
+                  widget.alphaSliderBorderColor ?? Colors.grey.shade400,
+              borderWidth: widget.alphaSliderBorderWidth ?? 1.5,
+              radius: widget.alphaSliderRadius,
             ),
-          ),
-          ClipRRect(
-            borderRadius: widget.pickerAreaBorderRadius,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Stack(
-                alignment: AlignmentDirectional.topCenter,
-                children: <Widget>[
-                  SizedBox(
-                    width: widget.colorPickerHeight -
-                        widget.hueRingStrokeWidth * 2,
-                    height: widget.colorPickerHeight -
-                        widget.hueRingStrokeWidth * 2,
-                    child: IGColorPickerHueRing(
-                      currentHsvColor,
-                      onColorChanging,
-                      strokeWidth: widget.hueRingStrokeWidth,
+
+          space,
+
+          //COLOR PICKER INPUT BAR
+          if (widget.showInputBar) ...[
+            if (widget.customInputBar != null)
+              widget.customInputBar!.call(currentHsvColor.toColor())
+            else
+              IGColorPickerInput(
+                color: currentHsvColor.toColor(),
+                onColorChanged: (Color color) {
+                  setState(
+                    () => currentHsvColor = HSVColor.fromColor(color),
+                  );
+                  widget.onColorChanged?.call(currentHsvColor.toColor());
+                },
+                enableAlpha: widget.enableAlpha,
+                onCurrentColorTap: () {
+                  Clipboard.setData(
+                    ClipboardData(
+                      text: currentHsvColor
+                          .toColor()
+                          .toHexString(includeHashSign: true),
                     ),
-                  ),
-                  Column(
-                    children: [
-                      SizedBox(height: widget.colorPickerHeight / 8.5),
-                      IGColorIndicator(currentHsvColor),
-                      const SizedBox(height: 10),
-                      IGColorPickerInput(
-                        color: currentHsvColor.toColor(),
-                        onColorChanged: (Color color) {
-                          setState(
-                            () => currentHsvColor = HSVColor.fromColor(color),
-                          );
-                          widget.onColorChanged(currentHsvColor.toColor());
-                        },
-                        enableAlpha: widget.enableAlpha,
-                        disable: true,
-                      ),
-                      if (widget.enableAlpha) const SizedBox(height: 5),
-                      if (widget.enableAlpha)
-                        SizedBox(
-                          height: 40,
-                          width: (widget.colorPickerHeight -
-                                  widget.hueRingStrokeWidth * 2) /
-                              2,
-                          child: IGColorPickerSlider(
-                            trackType: IGTrackType.alpha,
-                            hsvColor: currentHsvColor,
-                            onColorChanged: onColorChanging,
-                            displayThumbColor: true,
-                          ),
-                        ),
-                    ],
-                  ),
-                ],
+                  );
+                },
+                borderColor: widget.inputBarBorderColor,
+                borderWidth: widget.inputBarBorderWidth,
+                padding: widget.inputBarPadding,
+                radius: widget.inputBarRadius,
+                disable: widget.inputBarDisable ?? false,
               ),
-            ),
-          ),
+          ],
         ],
-      );
-    }
+      ),
+    );
+  }
+
+  //WIDGETS
+
+  Widget get space {
+    return SizedBox(height: widget.elementSpacing);
   }
 }

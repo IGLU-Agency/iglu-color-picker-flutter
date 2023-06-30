@@ -33,5 +33,5 @@ export './widgets/color_picker_hue_ring.dart';
 export './widgets/color_picker_input.dart';
 export './widgets/color_picker_label.dart';
 export './widgets/color_picker_slider.dart';
-//export './widgets/hue_ring_picker.dart';
-//export './widgets/slide_picker.dart';
+export './widgets/hue_ring_picker.dart';
+export './widgets/slide_picker.dart';

@@ -13,8 +13,8 @@ Developed with 💙 by [IGLU][iglu_link]
 
 There are three types of widgets available:
 - Color Picker
-- Hue Ring Picker (Coming Soon)
-- Slider Picker (Coming Soon)
+- Hue Ring Picker
+- Slider Picker
 
 ### Color Picker
 
@@ -22,9 +22,9 @@ You can use the color picker by simply adding this little snippet to your code
 
 ```dart
 IGColorPicker(
-  paletteType: widget.paletteType,
+  paletteType: IGPaletteType.hsvWithHue,
   onColorChanged: (color) {
-    print(color);
+    // Do something with color
   },
 )
 ```
@@ -32,6 +32,7 @@ IGColorPicker(
 You can control just about anything with the following parameters:
 
 ```dart
+
 // Widget type
 final IGPaletteType paletteType;
 // Starting color of the widget.
@@ -107,7 +108,168 @@ final Widget Function(
 
 ```
 
-## Example
+### Hue Ring Picker
+
+You can use the hue ring picker by simply adding this little snippet to your code
+
+```dart
+
+IGHueRingPicker(
+  onColorChanged: (color) {
+    // Do something with color
+  },
+)
+
+```
+
+You can control just about anything with the following parameters:
+
+
+```dart
+
+// Starting color of the widget.
+final Color? currentColor;
+// Function to manage the color change of the value
+final ValueChanged<Color>? onColorChanged;
+// Color Slider show / hide thumb color
+final bool displayThumbColor;
+
+// Hue Ring height
+final double hueRingHeight;
+// Hue Ring stroke width
+final double hueRingStrokeWidth;
+// Hue Ring border color
+final Color? hueRingBorderColor;
+// Hue Ring border width
+final double? hueRingBorderWidth;
+
+// Area border radius
+final double? areaRadius;
+// Area border color
+final Color? areaBorderColor;
+// Area border width
+final double? areaBorderWidth;
+
+// Padding of the whole view
+final EdgeInsetsGeometry? padding;
+// Height between one element and another
+final double elementSpacing;
+
+// show or hide the alpha slider
+final bool enableAlpha;
+// Alpha Slider border radius
+final double? alphaSliderRadius;
+// Alpha Slider border color
+final Color? alphaSliderBorderColor;
+// Alpha Slider border width
+final double? alphaSliderBorderWidth;
+
+// show or hide the input bar
+final bool showInputBar;
+// InputBar border radius
+final double? inputBarRadius;
+// InputBar border color
+final Color? inputBarBorderColor;
+// InputBar border width
+final double? inputBarBorderWidth;
+// InputBar padding
+final EdgeInsetsGeometry? inputBarPadding;
+// Disable the InputBar interaction
+final bool? inputBarDisable;
+// Function to generate a custom widget for the input bar
+final Widget Function(Color)? customInputBar;
+
+```
+
+
+### Slider Picker
+
+You can use the slide picker by simply adding this little snippet to your code
+
+```dart
+
+IGSlidePicker(
+  onColorChanged: (color) {
+    // Do something with color
+  },
+)
+
+```
+
+You can control just about anything with the following parameters:
+
+
+```dart
+
+// Starting color of the widget.
+final Color? currentColor;
+// Function to manage the color change of the value
+final ValueChanged<Color>? onColorChanged;
+// Color Type (RGB, HSL, HSV)
+final IGColorModel colorModel;
+
+// show or hide color indicator
+final bool showColorIndicator;
+// color indicator height
+final double? colorIndicatorHeight;
+// color indicator border color
+final Color? colorIndicatorBorderColor;
+// color indicator border width
+final double? colorIndicatorBorderWidth;
+// color indicator border radius
+final double? colorIndicatorRadius;
+// color indicator alignment begin
+final AlignmentGeometry colorIndicatorAlignmentBegin;
+// color indicator alignment end
+final AlignmentGeometry colorIndicatorAlignmentEnd;
+
+
+// show or hide the slider
+final bool showSlider;
+// show or hide the slider params
+final bool showSliderParams;
+// show or hide the slider text
+final bool showSliderText;
+// Color Slider border width
+final double? sliderRadius;
+// Color Slider border color
+final Color? sliderBorderColor;
+// Color Slider border width
+final double? sliderBorderWidth;
+// custom text style
+final TextStyle? sliderTextStyle;
+// Color Slider show / hide thumb color
+final bool displayThumbColor;
+
+
+// show or hide the alpha slider
+final bool enableAlpha;
+// Alpha Slider border radius
+final double? alphaSliderRadius;
+// Alpha Slider border color
+final Color? alphaSliderBorderColor;
+// Alpha Slider border width
+final double? alphaSliderBorderWidth;
+
+// Padding of the whole view
+final EdgeInsetsGeometry? padding;
+// Height between one element and another
+final double elementSpacing;
+
+// show color information or not (example rgb), you can hide it by passing empty array.
+final List<IGColorLabelType> colorDetailsLabelTypes;
+// Function to generate a custom widget for color information
+final Widget Function(
+  List<String> hex,
+  List<String> rgb,
+  List<String> hsv,
+  List<String> hsl,
+)? colorDetailsWidget;
+
+```
+
+
+### Example
 
 For full details explore the examples in [example](https://github.com/IGLU-Agency/iglu-color-picker-flutter/tree/master/example) folder.
 
