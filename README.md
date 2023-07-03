@@ -18,6 +18,8 @@ There are three types of widgets available:
 
 ### Color Picker
 
+![Color Picker][image_color_picker]
+
 You can use the color picker by simply adding this little snippet to your code
 
 ```dart
@@ -110,6 +112,8 @@ final Widget Function(
 
 ### Hue Ring Picker
 
+![Hue Ring Picker][image_hue_ring]
+
 You can use the hue ring picker by simply adding this little snippet to your code
 
 ```dart
@@ -183,6 +187,8 @@ final Widget Function(Color)? customInputBar;
 
 
 ### Slider Picker
+
+![Slider Picker][image_slider_picker]
 
 You can use the slide picker by simply adding this little snippet to your code
 
@@ -280,5 +286,8 @@ For full details explore the examples in [example](https://github.com/IGLU-Agenc
 [license_link]: https://opensource.org/licenses/MIT
 [logo_black]: https://raw.githubusercontent.com/IGLU-Agency/iglu-color-picker-flutter/main/assets/iglu_color_picker_flutter_logo_black.png#gh-light-mode-only
 [logo_white]: https://raw.githubusercontent.com/IGLU-Agency/iglu-color-picker-flutter/main/assets/iglu_color_picker_flutter_logo_white.png#gh-dark-mode-only
+[image_color_picker]: https://raw.githubusercontent.com/IGLU-Agency/iglu-color-picker-flutter/main/assets/color_picker.png
+[image_hue_ring]: https://raw.githubusercontent.com/IGLU-Agency/iglu-color-picker-flutter/main/assets/hue_ring.png
+[image_slider_picker]: https://raw.githubusercontent.com/IGLU-Agency/iglu-color-picker-flutter/main/assets/slider_picker.png
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
