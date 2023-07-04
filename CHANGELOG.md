@@ -1,4 +1,4 @@
-## Version 1.0.2 - 1.0.3 - 30/06/2023 
+## Version 1.0.2 - 1.0.3 - 1.0.4 - 30/06/2023 
 
 - Added Hue Ring Picker
 - Added Slide Picker 

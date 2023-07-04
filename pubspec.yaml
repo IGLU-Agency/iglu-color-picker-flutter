@@ -1,7 +1,22 @@
 name: iglu_color_picker_flutter
 description: Versatile Flutter color picker with extensive customization options.
-version: 1.0.3
+version: 1.0.4
 homepage: https://github.com/IGLU-Agency/iglu-color-picker-flutter
+funding:
+  - https://github.com/sponsors/IGLU-Agency
+topics:
+  - colors
+  - color-picker
+  - hue-ring-picker
+  - slide-picker
+  - hsl-hsv-rgb
+screenshots:
+  - description: "Color Picker"
+    path: assets/color_picker.png
+  - description: "Hue Ring Picker"
+    path: assets/hue_ring.png
+  - description: "Slider Picker"
+    path: assets/slider_picker.png
 
 environment:
   sdk: ">=3.0.1 <4.0.0"
