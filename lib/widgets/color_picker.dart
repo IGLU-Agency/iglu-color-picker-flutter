@@ -48,13 +48,14 @@ class IGColorPicker extends StatefulWidget {
     this.inputBarRadius,
     this.inputBarPadding,
     this.inputBarDisable,
+    this.inputStyle,
     this.customInputBar,
     //DECORATION COLOR PICKER COLOR DETAILS
     this.colorDetailsLabelTypes = const [
       IGColorLabelType.hex,
       IGColorLabelType.rgb,
       IGColorLabelType.hsv,
-      IGColorLabelType.hsl
+      IGColorLabelType.hsl,
     ],
     this.colorDetailsWidget,
   });
@@ -100,6 +101,7 @@ class IGColorPicker extends StatefulWidget {
   final double? inputBarBorderWidth;
   final EdgeInsetsGeometry? inputBarPadding;
   final bool? inputBarDisable;
+  final TextStyle? inputStyle;
   final Widget Function(Color)? customInputBar;
 
   //DECORATION COLOR PICKER COLOR DETAILS
@@ -203,6 +205,7 @@ class IGColorPickerState extends State<IGColorPicker> {
                     ),
                   );
                 },
+                inputStyle: widget.inputStyle,
                 borderColor: widget.inputBarBorderColor,
                 borderWidth: widget.inputBarBorderWidth,
                 padding: widget.inputBarPadding,

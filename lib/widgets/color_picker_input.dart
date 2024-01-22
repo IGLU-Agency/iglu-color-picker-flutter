@@ -23,6 +23,7 @@ class IGColorPickerInput extends StatefulWidget {
     this.borderWidth,
     this.borderColor,
     this.padding,
+    this.inputStyle,
   });
 
   //CONTAINER DECORATION OPTIONS
@@ -36,6 +37,7 @@ class IGColorPickerInput extends StatefulWidget {
   final bool enableAlpha;
   final bool disable;
   final void Function()? onCurrentColorTap;
+  final TextStyle? inputStyle;
 
   @override
   IGColorPickerInputState createState() => IGColorPickerInputState();
@@ -81,6 +83,7 @@ class IGColorPickerInputState extends State<IGColorPickerInput> {
                 focusNode: focusNode,
                 enabled: !widget.disable,
                 controller: textEditingController,
+                style: widget.inputStyle,
                 inputFormatters: [
                   UpperCaseTextFormatter(),
                   FilteringTextInputFormatter.allow(RegExp(kValidHexPattern)),
